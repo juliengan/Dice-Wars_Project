@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
-    private final int id = 0;
+    private final int id ;
     private ArrayList<Territory> territories;
     private String name;
 
@@ -19,7 +19,7 @@ public class Player {
 
     public Player(Integer id) {
         territories = new ArrayList<>();
-        id = id;
+        this.id = id;
     }
 
     public Move attackTerritory(Scanner input) {

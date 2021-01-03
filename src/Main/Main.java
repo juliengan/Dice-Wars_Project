@@ -181,7 +181,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
 
           while(!endGame){
-              System.out.println("Player "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
+              System.out.println("Player "+ game.getPlayers().get(indexPlayer).getId() +" : "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
               System.out.println("1. Attack");
               System.out.println("2.Pass");
               choice = input.nextInt();
@@ -198,7 +198,10 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
 
                   //Info players update
-                 game.infoPlayer(game.getPlayers().get(indexPlayer));
+                /*  for(Player p : game.getPlayers()){
+                      game.infoPlayer(p);
+                  }*/
+
 
               }
 

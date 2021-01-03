@@ -159,20 +159,26 @@ public class Game {
 
     public void throwDices(Move move) {
         Random random = new Random();
-        Territory attacker = getTerritoryById(move.getIdAttacker());
-        Territory defender = getTerritoryById(move.getIdDefender());
+
+        Territory attackerTerritory = getTerritoryById(move.getIdAttacker());
+        Territory defenderTerritory = getTerritoryById(move.getIdDefender());
+
+        Player attackerPlayer = getPlayerfromTerritory(attackerTerritory);
+        Player defendPlayer = getPlayerfromTerritory(defenderTerritory);
+
 
         int sumDiceAttacker = 0;
         int sumDiceDefender = 0;
 
-        for (int i = 0; i < attacker.getStrength(); i++) {
+        for (int i = 0; i < attackerTerritory.getStrength(); i++) {
 
             sumDiceAttacker += random.nextInt(6);
 
         }
-        System.out.printf("Attacker result : " + sumDiceAttacker);
+        System.out.println("Attacker result : " + sumDiceAttacker);
 
-        for (int i = 0; i < defender.getStrength() ; i++) {
+
+        for (int i = 0; i < defenderTerritory.getStrength() ; i++) {
 
             sumDiceDefender += random.nextInt(6);
         }
@@ -180,22 +186,38 @@ public class Game {
 
 
         if (sumDiceAttacker > sumDiceDefender) {
-            System.out.println("attacker wins");
 
-            //the attacker take the territory, we add it to his list
-            defender.setPlayerId(getPlayerfromTerritory(attacker).getId());
+            System.out.println("Attacker wins");
+
+            //the attackerTerritory take the territory, we add it to his list
+            attackerPlayer.getTerritories().add(defenderTerritory);
+
+
             //change the player of the taken territory
-            getPlayerfromTerritory(attacker).getTerritories().add(defender);
-           getPlayerfromTerritory(defender).getTerritories().remove(defender);
+            defenderTerritory.setPlayerId(attackerPlayer.getId());
+
+
+            System.out.println( getPlayerfromTerritory(attackerTerritory).getName()+ "prend le territoire du joueur"+ defenderTerritory.getId());
+            System.out.println("territoire conquis id player  : " + defenderTerritory.getPlayerId());
+
+            //Remove the territory for the loser
+           defendPlayer.getTerritories().remove(defenderTerritory);
+
             //he moves all his dice on the new territory exept 1
-           defender.setStrength(attacker.getStrength()-1);
+            defenderTerritory.setStrength(attackerTerritory.getStrength()-1);
+
+            attackerTerritory.setStrength(1);
+
+            for(Player p: this.players){
+                infoPlayer(p);
+            }
+
 
 
         }
         else {
-
+            attackerTerritory.setStrength(1);
             System.out.println("Defender wins");
-            attacker.setStrength(1);
         }
 
 
