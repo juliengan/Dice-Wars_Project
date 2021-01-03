@@ -33,6 +33,19 @@ public class Map {
        Territory t3 = new Territory(3,0);
        Territory t4 = new Territory(4,0);
 
+        //Initialization of neighbours
+        t1.UpdateneighboringTer(t3);
+
+        t2.UpdateneighboringTer(t3);
+        t2.UpdateneighboringTer(t4);
+
+        t3.UpdateneighboringTer(t1);
+        t3.UpdateneighboringTer(t2);
+        t3.UpdateneighboringTer(t4);
+
+        t4.UpdateneighboringTer(t2);
+        t4.UpdateneighboringTer(t3);
+
        this.listOfTerritories = new ArrayList<Territory>();
 
        listOfTerritories.add(o);
@@ -46,16 +59,17 @@ public class Map {
         this.map = new Territory[][]{  {t1, t1, t1, o, o, o, o, t2, t2, t2},
                                   {t1, t1, t1, t1, t1, o, o, t2, t2, t2},
                                   {t1, t1, t1, t1, t1, o, o, t2, t2, t2},
-                                  {t1, t1, t1, t2, o, o, o, t2, t2, t2},
+                                  {t1, t1, t1, t1, o, o, o, t2, t2, t2},
                                   {t1, t1, t1, t1, t1, o, t2, t2, t2, t4},
-                                  {t3, t3, t3, t3, t3, t1, t2, t2, t4, t4},
+                                  {t3, t3, t3, t3, t3, t3, t2, t2, t4, t4},
                                   {t3, t3, t3, t3, t3, t3, t3, t2, t4, t4},
                                   {t3, t3, t3, t3, t3, t3, t3, t4, t4, t4},
                                   {o, o, o,o, t4, t4, t4, t4, t4, t4},
-                                  {t1, t1, t1, t4, t4, t4, t4, t4, t4, t4},
+                                  {t4, t4, t4, t4, t4, t4, t4, t4, t4, t4},
 
 
         };
+
 
 
 

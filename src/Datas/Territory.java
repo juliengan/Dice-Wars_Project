@@ -12,6 +12,7 @@ public class Territory {
     public void addStrength(int n){
         this.strength += n;
     }
+
     public void setPlayerId(Integer playerId) {
         this.playerId = playerId;
     }
@@ -41,8 +42,12 @@ public class Territory {
         this.id = id;
         this.playerId = playerID;
         this.strength = 1;
+        this.neighboringTer = new ArrayList<Territory>();
     }
     public void UpdateIDPlayer(){}
-    public void UpdateneighboringTer(){}
+
+    public void UpdateneighboringTer(Territory t){
+       neighboringTer.add(t);
+    }
 
 }

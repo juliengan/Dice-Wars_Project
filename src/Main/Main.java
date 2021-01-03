@@ -139,6 +139,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
        allTerritories = game.getMap().getListOfTerritories();
        game.territoriesDistribution(allTerritories, random);
 
+
+
        //Distribution strength for territories (number of dices per territory)
         int totalStrength = 8;
         for(Player p : game.getPlayers()) {
@@ -156,6 +158,11 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           int firstPlayer = random.nextInt(game.getPlayers().size());
           int indexPlayer = firstPlayer;
           boolean endGame = false;
+
+
+          for(Player p : game.getPlayers()){
+              p.infoPlayer();
+          }
           game.getPlayers().get(0).attackTerritory(input);
 
           while(!endGame){
