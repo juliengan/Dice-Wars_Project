@@ -30,6 +30,9 @@ public class Game {
 
     }
 
+    public void setAllTerritories(ArrayList<Territory> allTerritories) {
+        this.allTerritories = allTerritories;
+    }
 
     /************* Display *******************/
 
@@ -55,19 +58,21 @@ public class Game {
         int playerIndex = 0;
      //on enlève le territoire neutre
         Territory randomTerritory;
+        ArrayList<Territory> temp = (ArrayList<Territory>) allTerritories.clone();
 
-        allTerritories.remove(0);
-        while(allTerritories.size() != 0){
+        temp.remove(0);
+        while(temp.size() != 0){
 
                 //choose a random index among territories lisrt
-                int randomIndex = random.nextInt(allTerritories.size());
+                int randomIndex = random.nextInt(temp.size());
                 //pick the territory according to the index
-                 randomTerritory = allTerritories.get(randomIndex);
-                 //delete the territory of the list
-                 allTerritories.remove(randomIndex);
+                 randomTerritory = temp.get(randomIndex);
                 //give the territory to the current player
                  players.get(playerIndex).getTerritories().add(randomTerritory);
-
+                 //set the playerid for the territory
+                 randomTerritory.setPlayerId( players.get(playerIndex).getId());
+                 //delete the territory of the list
+                 temp.remove(randomIndex);
 
 
             playerIndex ++;
@@ -126,12 +131,12 @@ public class Game {
 
     //This function return a territory for a given ID
     public Territory getTerritoryById(int id){
-
         for(Territory t : this.allTerritories ){
             if(t.getId() == id){
                 return  t;
             }
         }
+        System.out.println("null");
         return null;
     }
 
@@ -141,7 +146,7 @@ public class Game {
         System.out.println("Name : " + p.getName());
         System.out.println("Territories : ");
         for(Territory t : p.getTerritories()) {
-            System.out.println(t.getId() + " -> neighbour : ");
+            System.out.println(t.getId() +"("+t.getStrength()+ ")  -> neighbour : ");
             for (Territory v : t.getNeighboringTer()) {
                 System.out.println(v.getId() +", ");
             }
@@ -160,26 +165,41 @@ public class Game {
         int sumDiceAttacker = 0;
         int sumDiceDefender = 0;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < attacker.getStrength(); i++) {
 
             sumDiceAttacker += random.nextInt(6);
 
         }
         System.out.printf("Attacker result : " + sumDiceAttacker);
-        for (int i = 0; i < 5; i++) {
+
+        for (int i = 0; i < defender.getStrength() ; i++) {
 
             sumDiceDefender += random.nextInt(6);
         }
         System.out.printf("Defender result : " + sumDiceDefender);
 
+
         if (sumDiceAttacker > sumDiceDefender) {
             System.out.println("attacker wins");
 
-        } else {
+            //the attacker take the territory, we add it to his list
+            defender.setPlayerId(getPlayerfromTerritory(attacker).getId());
+            //change the player of the taken territory
+            getPlayerfromTerritory(attacker).getTerritories().add(defender);
+           getPlayerfromTerritory(defender).getTerritories().remove(defender);
+            //he moves all his dice on the new territory exept 1
+           defender.setStrength(attacker.getStrength()-1);
 
-            System.out.println("Defender wins");
 
         }
+        else {
+
+            System.out.println("Defender wins");
+            attacker.setStrength(1);
+        }
+
+
+
     }
 
 public Player getPlayerfromTerritory(Territory t){

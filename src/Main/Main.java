@@ -136,9 +136,19 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         //display of the map
         game.displayMap();
 
-       //Distribution of territories
-       allTerritories = game.getMap().getListOfTerritories();
+        allTerritories = game.getMap().getListOfTerritories();
+        game.setAllTerritories(allTerritories);
+
+
+        System.out.println("taille t : "+ game.getAllTerritories().size());
+        System.out.println("taille all t : "+ allTerritories.size());
+
+
+        //Distribution of territories
        game.territoriesDistribution(allTerritories, random);
+
+        game.setAllTerritories(game.getMap().getListOfTerritories());
+        System.out.println("taille all t ext : "+game.getMap().getListOfTerritories().size());
 
 
 
@@ -161,6 +171,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           boolean endGame = false;
           int choice;
           Move move;
+
+
 
 
           for(Player p : game.getPlayers()){
