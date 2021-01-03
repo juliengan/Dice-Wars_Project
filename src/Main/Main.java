@@ -185,8 +185,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           // while the condition is not reach, we continue to play
           while(!endGame){
 
-
-
+   
               if(game.getPlayers().get(indexPlayer).isLost() == true)
                   indexPlayer++;
 
@@ -241,11 +240,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                       p.setLost(true);
 
                   }
-                  else if(p.getTerritories().size() == 1 && p.getTerritories().get(0).getStrength()<=1){
-                      System.out.println("Player "+ p.getName()+" lost because he has only one territory and not enough strength");
-                       p.setLost(true);
 
-                  }
               }
 
 
