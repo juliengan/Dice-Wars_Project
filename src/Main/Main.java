@@ -171,9 +171,16 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
               System.out.println("1. Attack");
               System.out.println("2.Pass");
               choice = input.nextInt();
+
               if(choice == 1){
+
                   //The current player attack
                   game.getPlayers().get(indexPlayer).attackTerritory(input);
+
+                  //Info players update
+                  for(Player p : game.getPlayers()){
+                      p.infoPlayer();
+                  }
 
               }
 

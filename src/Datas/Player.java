@@ -40,6 +40,11 @@ public class Player {
                 continue;
             }
 
+            else if(getTerritoryById(attack).getStrength()<=1){
+                System.out.println("This territory doesn't have enough strength to attack");
+                continue;
+            }
+
 
             System.out.print("Enter the territory you want to attack : ");
             defend = input.nextInt();
