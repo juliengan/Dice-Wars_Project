@@ -158,24 +158,33 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           int firstPlayer = random.nextInt(game.getPlayers().size());
           int indexPlayer = firstPlayer;
           boolean endGame = false;
+          int choice;
 
 
           for(Player p : game.getPlayers()){
               p.infoPlayer();
           }
-          game.getPlayers().get(0).attackTerritory(input);
+
 
           while(!endGame){
-              /*if(){
+              System.out.println("Player "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
+              System.out.println("1. Attack");
+              System.out.println("2.Pass");
+              choice = input.nextInt();
+              if(choice == 1){
+                  //The current player attack
+                  game.getPlayers().get(indexPlayer).attackTerritory(input);
 
               }
+
+
               else{
-                  playerIndex = playerIndex + 1;
-	              if(playerIndec == player.size()
-		                playerIndex = 0
-	               if playerIndex == firstPlayerIndex
-	                    game.endTurn();
-              }*/
+                 indexPlayer +=1;
+	              if(indexPlayer== game.getPlayers().size())
+		                indexPlayer = 0;
+	               if( indexPlayer== firstPlayer)
+                       System.out.println("fin du tour");
+              }
 
 
           }
