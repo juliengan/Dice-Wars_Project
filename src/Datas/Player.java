@@ -10,6 +10,7 @@ public class Player {
     private final int id ;
     private ArrayList<Territory> territories;
     private String name;
+    private boolean lost = false;
     /*******************************************/
 
 
@@ -95,6 +96,10 @@ return move;
         this.name = name;
     }
 
+    public void setLost(boolean lost) {
+        this.lost = lost;
+    }
+
 
     /*********** GETTERS ***********/
 
@@ -111,6 +116,7 @@ return move;
         return territories;
     }
 
-
-
+    public boolean isLost() {
+        return lost;
+    }
 }

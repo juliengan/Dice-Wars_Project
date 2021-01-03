@@ -185,6 +185,25 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           // while the condition is not reach, we continue to play
           while(!endGame){
 
+
+
+              if(game.getPlayers().get(indexPlayer).isLost() == true)
+                  indexPlayer++;
+
+              if(indexPlayer== game.getPlayers().size())
+                  indexPlayer = 0;
+
+              // If the first player play again, its the end of the turn
+              if( indexPlayer == firstPlayer)
+                  System.out.println("END TURN");
+              //redistribution des dés
+             if((indexPlayer+1) == indexPlayer){
+                  System.out.println("End of the game, Player "+ game.getPlayers().get(indexPlayer)+" wins !");
+                  endGame = true;
+                  break;
+              }
+
+
               System.out.println("Player "+ game.getPlayers().get(indexPlayer).getId() +" : "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
               System.out.println("1. Attack");
               System.out.println("2.Pass");
@@ -213,6 +232,20 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 	              // If the first player play again, its the end of the turn
 	               if( indexPlayer == firstPlayer)
                        System.out.println("END TURN");
+	               //redistribution des dés
+              }
+
+              for(Player p : game.getPlayers()){
+                  if(p.getTerritories().size() == 0){
+                      System.out.println("Player "+ p.getName()+" doesn't have any territory, he lost !");
+                      p.setLost(true);
+
+                  }
+                  else if(p.getTerritories().size() == 1 && p.getTerritories().get(0).getStrength()<=1){
+                      System.out.println("Player "+ p.getName()+" lost because he has only one territory and not enough strength");
+                       p.setLost(true);
+
+                  }
               }
 
 
