@@ -123,6 +123,25 @@ public class Game {
 
     }
 
+
+    public void infoPlayer(Player p)
+    {
+        System.out.println("===============");
+        System.out.println("Name : " + p.getName());
+        System.out.println("Territories : ");
+        for(Territory t : p.getTerritories()) {
+            System.out.println(t.getId() + " -> neighbour : ");
+            for (Territory v : t.getNeighboringTer()) {
+                System.out.println(v.getId() +", ");
+            }
+        }
+        System.out.println("===============");
+
+
+
+    }
+
+
     public Map getMap() {
         return map;
     }

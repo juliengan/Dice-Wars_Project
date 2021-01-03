@@ -162,7 +162,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
 
           for(Player p : game.getPlayers()){
-              p.infoPlayer();
+             game.infoPlayer(p);
           }
 
 
@@ -178,9 +178,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                   game.getPlayers().get(indexPlayer).attackTerritory(input);
 
                   //Info players update
-                  for(Player p : game.getPlayers()){
-                      p.infoPlayer();
-                  }
+                 game.infoPlayer(game.getPlayers().get(indexPlayer));
 
               }
 

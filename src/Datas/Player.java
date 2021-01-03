@@ -99,22 +99,6 @@ public class Player {
         return name;
     }
 
-    public void infoPlayer()
-    {
-        System.out.println("===============");
-        System.out.println("Name : " + this.name);
-        System.out.println("Territories : ");
-        for(Territory t : territories) {
-            System.out.println(t.getId() + " -> neighbour : ");
-            for (Territory v : t.getNeighboringTer()) {
-                System.out.println(v.getId() +", ");
-            }
-        }
-        System.out.println("===============");
 
 
-
-
-
-    }
 }
