@@ -213,10 +213,38 @@ public class Game {
         else {
             attackerTerritory.setStrength(1);
             System.out.println("Defender wins");
+            for(Player p: this.players){
+                infoPlayer(p);
+            }
         }
 
 
 
+    }
+
+    public boolean checkEnd(){
+        int cpt =0;
+
+        for(Player p: this.players){
+
+            if(p.isLost() == false)
+                cpt++;
+        }
+        if(cpt == 1)
+            return true;
+        else
+            return  false;
+
+
+    }
+    public Player whoIsWinner()
+    {
+        for(Player p : this.players){
+            if(p.isLost() ==false)
+                return p;
+        }
+
+        return  null;
     }
 
 

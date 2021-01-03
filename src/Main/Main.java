@@ -185,22 +185,13 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           // while the condition is not reach, we continue to play
           while(!endGame){
 
-   
+
               if(game.getPlayers().get(indexPlayer).isLost() == true)
                   indexPlayer++;
 
               if(indexPlayer== game.getPlayers().size())
                   indexPlayer = 0;
 
-              // If the first player play again, its the end of the turn
-              if( indexPlayer == firstPlayer)
-                  System.out.println("END TURN");
-              //redistribution des dés
-             if((indexPlayer+1) == indexPlayer){
-                  System.out.println("End of the game, Player "+ game.getPlayers().get(indexPlayer)+" wins !");
-                  endGame = true;
-                  break;
-              }
 
 
               System.out.println("Player "+ game.getPlayers().get(indexPlayer).getId() +" : "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
@@ -242,9 +233,10 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                   }
 
               }
-
+              endGame = game.checkEnd();
 
           }
+        System.out.println("End of the game the winner is : " + game.whoIsWinner().getName());
 
 
         }
