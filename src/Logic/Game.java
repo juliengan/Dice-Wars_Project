@@ -10,35 +10,30 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-
+    /******************************************/
     private  Map map;
     private ArrayList <Territory> allTerritories;
     private final ArrayList<Player> players;
+    /******************************************/
 
-
+    /*************** CONSTRUCTOR **************/
     public Game(ArrayList<Player> players, Map newMap){
+
         map = new Map();
         allTerritories = new ArrayList<Territory>();
         this.players = players;
         this.map = newMap;
     }
-    public void OrderGame(/*array of players*/){ //order of the players
-        System.out.println(/*name of the player,*/"Your turn :)\n");
-    }
-    public void DisplayMap()
-    {
 
-    }
 
-    public void setAllTerritories(ArrayList<Territory> allTerritories) {
-        this.allTerritories = allTerritories;
-    }
 
-    /************* Display *******************/
+
+
+
+
+    /************* DISPLAY MAP *******************/
 
     public void displayMap(){
-
-
 
         for(int y = 0; y <10; y++) {
             System.out.print("   ");
@@ -49,51 +44,56 @@ public class Game {
             System.out.println();
         }
     }
-    /*********** Game configuration **********/
 
-    /********** Territories distribution *******/
+
+    /*********** TERRITORIES DISTRIBUTION *********/
 
     public void territoriesDistribution(ArrayList<Territory> allTerritories, Random random){
 
         int playerIndex = 0;
-     //on enlève le territoire neutre
+
+        // Create a random territory
         Territory randomTerritory;
+
+        // Create a deep copy of allTerritories to avoid changes
         ArrayList<Territory> temp = (ArrayList<Territory>) allTerritories.clone();
 
+        //Remove the first territory which is neutral (water)
         temp.remove(0);
+
+        // While there are territories to distribute in th list
         while(temp.size() != 0){
 
-                //choose a random index among territories lisrt
+                //choose a random index among the size of the list
                 int randomIndex = random.nextInt(temp.size());
+
                 //pick the territory according to the index
                  randomTerritory = temp.get(randomIndex);
+
                 //give the territory to the current player
                  players.get(playerIndex).getTerritories().add(randomTerritory);
-                 //set the playerid for the territory
+
+                 //set the player id for the territory
                  randomTerritory.setPlayerId( players.get(playerIndex).getId());
+
                  //delete the territory of the list
                  temp.remove(randomIndex);
 
-
+            // increase the playerindex to deal with the next one
             playerIndex ++;
+
+            // If we reach the end of the list of player we put the index to 0 and continue
             if(playerIndex == players.size() )
                 playerIndex = 0;
         }
 
 
-   for(int j = 0; j < players.size(); j ++){
-       System.out.println("Player :" + players.get(j).getName());
-       for(int i = 0; i < players.get(j).getTerritories().size(); i ++ ){
-           System.out.println(players.get(j).getTerritories().get(i).getId());
-       }
-   }
-
     }
 
-
+    /*********** STRENGTH DISTRIBUTION *********/
 
     public void distributionStrengthTerritory(int totalStrength, Player p, Random r){
-        System.out.println("Player : " + p.getName());
+        System.out.println("Player "+ p.getId()+" : "+ p.getName().toUpperCase());
 
         int randomStrength;
         final int MAX_STRENGTH = totalStrength-players.size();
@@ -118,14 +118,9 @@ public class Game {
         }
 
 
-
           for(int j = 0; j < p.getTerritories().size(); j++){
               System.out.println("Territory "+p.getTerritories().get(j).getId()+ " : "+ p.getTerritories().get(j).getStrength() + "(strength)");
           }
-
-
-
-
 
     }
 
@@ -224,6 +219,10 @@ public class Game {
 
     }
 
+
+
+    /*********** GETTERS *********/
+
 public Player getPlayerfromTerritory(Territory t){
         for(Player p :this.players){
             if(p.getTerritories().contains(t))
@@ -246,5 +245,10 @@ public Player getPlayerfromTerritory(Territory t){
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    /*********** SETTERS *********/
+    public void setAllTerritories(ArrayList<Territory> allTerritories) {
+        this.allTerritories = allTerritories;
     }
 }

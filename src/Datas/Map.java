@@ -27,7 +27,8 @@ public class Map {
 
     public Map(){
 
-        Territory o = new Territory(0,0);
+        //Creation of four territory : o is the water
+       Territory o = new Territory(0,0);
        Territory t1 = new Territory(1,0);
        Territory t2 = new Territory(2,0);
        Territory t3 = new Territory(3,0);
@@ -48,6 +49,7 @@ public class Map {
 
        this.listOfTerritories = new ArrayList<Territory>();
 
+       // Add all territories to the list of territories
        listOfTerritories.add(o);
        listOfTerritories.add(t1);
        listOfTerritories.add(t2);
