@@ -1,6 +1,7 @@
 package Logic;
 
 import Datas.Map;
+import Datas.Move;
 import Datas.Player;
 import Datas.Territory;
 
@@ -123,6 +124,16 @@ public class Game {
 
     }
 
+    //This function return a territory for a given ID
+    public Territory getTerritoryById(int id){
+
+        for(Territory t : this.allTerritories ){
+            if(t.getId() == id){
+                return  t;
+            }
+        }
+        return null;
+    }
 
     public void infoPlayer(Player p)
     {
@@ -140,6 +151,47 @@ public class Game {
 
 
     }
+
+    public void throwDices(Move move) {
+        Random random = new Random();
+        Territory attacker = getTerritoryById(move.getIdAttacker());
+        Territory defender = getTerritoryById(move.getIdDefender());
+
+        int sumDiceAttacker = 0;
+        int sumDiceDefender = 0;
+
+        for (int i = 0; i < 5; i++) {
+
+            sumDiceAttacker += random.nextInt(6);
+
+        }
+        System.out.printf("Attacker result : " + sumDiceAttacker);
+        for (int i = 0; i < 5; i++) {
+
+            sumDiceDefender += random.nextInt(6);
+        }
+        System.out.printf("Defender result : " + sumDiceDefender);
+
+        if (sumDiceAttacker > sumDiceDefender) {
+            System.out.println("attacker wins");
+
+        } else {
+
+            System.out.println("Defender wins");
+
+        }
+    }
+
+public Player getPlayerfromTerritory(Territory t){
+        for(Player p :this.players){
+            if(p.getTerritories().contains(t))
+                return p;
+        }
+
+        return null;
+
+}
+
 
 
     public Map getMap() {

@@ -1,6 +1,7 @@
 package Datas;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
@@ -16,13 +17,12 @@ public class Player {
         return territories;
     }
 
-    public Player(Integer id)
-    {
+    public Player(Integer id) {
         territories = new ArrayList<>();
         id = id;
     }
-    public void attackTerritory(Scanner input)
-    {
+
+    public Move attackTerritory(Scanner input) {
         Move move = null;
         int territoryIdAttack;
         int territoryIdDefend;
@@ -30,7 +30,7 @@ public class Player {
         Integer attack;
         Integer defend;
 
-        while(move == null) {
+        while (move == null) {
 
             System.out.print("Enter your territory : ");
             attack = input.nextInt();
@@ -38,9 +38,7 @@ public class Player {
             if (!this.territories.contains(getTerritoryById(attack))) {
                 System.out.println("This is not your territory, you can't attack");
                 continue;
-            }
-
-            else if(getTerritoryById(attack).getStrength()<=1){
+            } else if (getTerritoryById(attack).getStrength() <= 1) {
                 System.out.println("This territory doesn't have enough strength to attack");
                 continue;
             }
@@ -50,28 +48,29 @@ public class Player {
             defend = input.nextInt();
 
 
-          if(getTerritoryById(attack).getNeighboringTer().contains(getTerritoryById(defend))){
-              System.out.println("The territory you want to attack is not your neighbour ");
-              continue;
-          }
-          else if(this.territories.contains(getTerritoryById(defend))){
-              System.out.println("You can't attack your own territory ! ");
-              continue;
-          }
-
-
+            if (getTerritoryById(attack).getNeighboringTer().contains(getTerritoryById(defend))) {
+                System.out.println("The territory you want to attack is not your neighbour ");
+                continue;
+            } else if (this.territories.contains(getTerritoryById(defend))) {
+                System.out.println("You can't attack your own territory ! ");
+                continue;
+            }
 
 
             move = new Move(attack, defend);
-
-
+            System.out.println("Your move is : (" + move.getIdAttacker() + " " + move.getIdDefender() + ")");
 
         }
+return move;
 
-        System.out.println("Your move is : (" + move.getIdAttacker() + " " + move.getIdDefender() + ")");
+
+
+
+
 
 
     }
+
 
     //This function return a territory for a given ID
     public Territory getTerritoryById(int id){

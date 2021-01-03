@@ -1,4 +1,5 @@
 package Main;
+import Datas.Move;
 import Datas.Player;
 import Datas.Territory;
 import Logic.Game;
@@ -159,6 +160,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           int indexPlayer = firstPlayer;
           boolean endGame = false;
           int choice;
+          Move move;
 
 
           for(Player p : game.getPlayers()){
@@ -174,8 +176,14 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
               if(choice == 1){
 
-                  //The current player attack
-                  game.getPlayers().get(indexPlayer).attackTerritory(input);
+                  //The current player attack, we save its move if it is valid
+                  move = game.getPlayers().get(indexPlayer).attackTerritory(input);
+
+                  //Throw dice
+                 // System.out.println("Player : "+ game.throwDices(move).getName() +" wins.");
+                  game.throwDices(move);
+
+
 
                   //Info players update
                  game.infoPlayer(game.getPlayers().get(indexPlayer));
