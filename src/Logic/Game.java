@@ -28,9 +28,6 @@ public class Game {
 
 
 
-
-
-
     /************* DISPLAY MAP *******************/
 
     public void displayMap(){
@@ -135,6 +132,8 @@ public class Game {
         return null;
     }
 
+    /*********** INFO PLAYER *********/
+
     public void infoPlayer(Player p)
     {
         System.out.println("===============");
@@ -151,6 +150,8 @@ public class Game {
 
 
     }
+
+    /*********** THROW DICES *********/
 
     public void throwDices(Move move) {
         Random random = new Random();
@@ -222,6 +223,32 @@ public class Game {
 
     }
 
+
+    public int nbOfcontiguousTerritory(Player p) {
+
+        int nb = 0;
+
+        System.out.println("Liste de ses territoires");
+        for(Territory t : p.getTerritories()){
+            System.out.println(t.getId());
+
+        }
+
+        for (Territory t : p.getTerritories()) {
+            for (Territory v : t.getNeighboringTer()) {
+                if (p.getTerritories().contains(v)) {
+                    System.out.println("neighbor : "+t.getId() + "and"+v.getId());
+                    nb++;
+                }
+            }
+
+
+        }
+return nb;
+    }
+
+    /*********** CHECK END *********/
+
     public boolean checkEnd(){
         int cpt =0;
 
@@ -235,8 +262,9 @@ public class Game {
         else
             return  false;
 
-
     }
+
+    /*********** WHO IS WINNER *********/
     public Player whoIsWinner()
     {
         for(Player p : this.players){
@@ -251,7 +279,7 @@ public class Game {
 
     /*********** GETTERS *********/
 
-public Player getPlayerfromTerritory(Territory t){
+    public Player getPlayerfromTerritory(Territory t){
         for(Player p :this.players){
             if(p.getTerritories().contains(t))
                 return p;

@@ -222,20 +222,32 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 	              // If the first player play again, its the end of the turn
 	               if( indexPlayer == firstPlayer)
                        System.out.println("END TURN");
-	               //redistribution des dés
+
+
+
+	               //redistribution des dés, on récupère les territoires contigus.
+                  int nb;
+                  for(Player p : game.getPlayers()){
+                      System.out.println("player : "+ p.getName());
+                      nb = game.nbOfcontiguousTerritory(p);
+                      System.out.println("There are "+ nb+" contiguous");
+                  }
+                  //distribution strength
+
+
+
               }
 
-              for(Player p : game.getPlayers()){
+              for(Player p : game.getPlayers()) {
                   if(p.getTerritories().size() == 0){
                       System.out.println("Player "+ p.getName()+" doesn't have any territory, he lost !");
                       p.setLost(true);
-
                   }
-
               }
               endGame = game.checkEnd();
 
           }
+
         System.out.println("End of the game the winner is : " + game.whoIsWinner().getName());
 
 
