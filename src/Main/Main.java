@@ -154,7 +154,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
        //Distribution strength for territories (number of dices per territory)
        //Probleme : pourquoi le premier joueur en a un de plus ? A corriger !
-        int totalStrength = 8;
+        int totalStrength = 8 ;
         for(Player p : game.getPlayers()) {
             game.distributionStrengthTerritory(totalStrength, p, random);
         }
@@ -163,12 +163,17 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
           /******************** PLAYING *********************/
 
+        //------------------------------------------------------------------------------------------
+
           // Choose the first player randomly
           int firstPlayer = random.nextInt(game.getPlayers().size());
           int indexPlayer = firstPlayer;
 
           // Boolean to stop the game when the ocndition is reach
           boolean endGame = false;
+
+          //Boolean to check if the turn is over
+          boolean endTurn = false;
 
           // Choose te action : attack or pass
           int choice;
@@ -181,72 +186,62 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           for(Player p : game.getPlayers()){
              game.infoPlayer(p);
           }
+          //------------------------------------------------------------------------------------------
 
           // while the condition is not reach, we continue to play
           while(!endGame){
 
-
-              if(game.getPlayers().get(indexPlayer).isLost() == true)
+              // A player who loose can't play, we pass its turn
+              if(game.getPlayers().get(indexPlayer).isLost())
                   indexPlayer++;
 
-              if(indexPlayer== game.getPlayers().size())
+              if(indexPlayer == game.getPlayers().size())
                   indexPlayer = 0;
 
 
+             switch(game.askAction(input,indexPlayer)){
 
-              System.out.println("Player "+ game.getPlayers().get(indexPlayer).getId() +" : "+ game.getPlayers().get(indexPlayer).getName()+", it's your turn.");
-              System.out.println("1. Attack");
-              System.out.println("2.Pass");
-              choice = input.nextInt();
+                 case 1: /***ATTACK***/
+                     // The current player attack, we save its move if it is valid
+                     move = game.getPlayers().get(indexPlayer).attackTerritory(input);
 
-              if(choice == 1){
+                     // The defender and attacker throw their dices, we compare and perform the change according to the result.
+                     game.throwDices(move);
+                     break;
 
-                  // The current player attack, we save its move if it is valid
-                  move = game.getPlayers().get(indexPlayer).attackTerritory(input);
-
-                  // The defender and attacker throw their dices, we compare and perform the change according to the result.
-                  // REMAINDER : if the attacker wins he takes the territory he attcked, and put all his dice on it exept 1 he let on his initial territory
-                  //            if defender wins the attacker can inly keep one dice on his territory
-                  game.throwDices(move);
-              }
-
-
-              else {
-                  // If the  player pass, we increase the index of the next player
-                  indexPlayer +=1;
-
-                  // If the index of the player reach the end, we put the index to 0 (the first player play)
-	              if(indexPlayer== game.getPlayers().size())
-		                indexPlayer = 0;
-
-	              // If the first player play again, its the end of the turn
-	               if( indexPlayer == firstPlayer)
-                       System.out.println("END TURN");
+                 case 2: /**PASS**/
+                     // If the  player pass, we increase the index of the next player
+                    indexPlayer++;
+                     if(indexPlayer == players.size())
+                        indexPlayer = 0;
 
 
+                     if(game.isEndTurn(endTurn, firstPlayer, indexPlayer)) {
 
-	               //redistribution des dés, on récupère les territoires contigus.
-                  int nb;
-                  for(Player p : game.getPlayers()){
-                      System.out.println("player : "+ p.getName());
-                      nb = game.nbOfcontiguousTerritory(p);
-                      System.out.println("There are "+ nb+" contiguous");
-                  }
-                  //distribution strength
+                         //redistribution des dés, on récupère les territoires contigus.
+                         int nb;
+                         for (Player p : game.getPlayers()) {
+                             System.out.println("player : " + p.getName());
+                             nb = game.nbOfcontiguousTerritory(p);
+
+                             //distribution strength
+                             game.distributionStrengthTerritory(nb, p, random);
+                             System.out.println("There are " + nb + " contiguous");
+                         }
+                     }
+                     break;
+
+                 default :
+                     System.out.println("Please, choose a valid option.");
+                     break;
+
+             }
 
 
+              game.isPlayerLoose();      //check if there is a player who loose
+              endGame = game.checkEnd(); // check if the game is over or not (only one player)
 
-              }
-
-              for(Player p : game.getPlayers()) {
-                  if(p.getTerritories().size() == 0){
-                      System.out.println("Player "+ p.getName()+" doesn't have any territory, he lost !");
-                      p.setLost(true);
-                  }
-              }
-              endGame = game.checkEnd();
-
-          }
+          }//end while
 
         System.out.println("End of the game the winner is : " + game.whoIsWinner().getName());
 

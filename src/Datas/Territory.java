@@ -7,7 +7,7 @@ public class Territory {
     private final Integer id;
     private Integer playerId;
     private Integer strength;
-    private ArrayList<Territory> neighboringTer;
+    private final ArrayList<Territory> neighboringTer;
 
     public void addStrength(int n){
         this.strength += n;

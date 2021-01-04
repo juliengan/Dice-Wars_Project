@@ -86,10 +86,7 @@ return move;
 
 
 
-    public void endTurn()
-    {
 
-    }
     /*********** SETTERS ************/
 
     public void setName(String name) {

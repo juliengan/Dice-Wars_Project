@@ -5,8 +5,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Map {
-   private Territory [][] map;
 
+   private Territory [][] map;
    private ArrayList<Territory> listOfTerritories;
 
 

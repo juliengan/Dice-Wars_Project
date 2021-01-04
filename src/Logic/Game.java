@@ -193,9 +193,6 @@ public class Game {
             defenderTerritory.setPlayerId(attackerPlayer.getId());
 
 
-            System.out.println( getPlayerfromTerritory(attackerTerritory).getName()+ "prend le territoire du joueur"+ defenderTerritory.getId());
-            System.out.println("territoire conquis id player  : " + defenderTerritory.getPlayerId());
-
             //Remove the territory for the loser
            defendPlayer.getTerritories().remove(defenderTerritory);
 
@@ -244,7 +241,44 @@ public class Game {
 
 
         }
-return nb;
+        return nb;
+    }
+
+
+
+    /*********** ASK AN ACTION *********/
+
+    public int askAction(Scanner input, int indexPlayer){
+        int choice;
+        System.out.println("Player "+ this.players.get(indexPlayer).getId() +" : "+ this.players.get(indexPlayer).getName()+", it's your turn.");
+        System.out.println("1.Attack");
+        System.out.println("2.Pass");
+
+        return choice = input.nextInt();
+
+    }
+
+    /*********** CHECK IF A PLAYER LOOSE *********/
+
+    public void isPlayerLoose() {
+
+        for (Player p : this.players) {
+            if (p.getTerritories().size() == 0) {
+                System.out.println("Player " + p.getName() + " doesn't have any territory, he lost !");
+                p.setLost(true);
+            }
+        }
+    }
+
+    /*********** CHECK END TURN *********/
+    public boolean isEndTurn(boolean endTurn, int firstPlayer, int indexPlayer){
+
+        // If the first player play again, its the end of the turn
+        if( indexPlayer == firstPlayer) {
+            System.out.println("END TURN");
+            return true;
+        }
+        return false;
     }
 
     /*********** CHECK END *********/
@@ -287,9 +321,7 @@ return nb;
 
         return null;
 
-}
-
-
+    }
 
     public Map getMap() {
         return map;
