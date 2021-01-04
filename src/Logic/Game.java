@@ -31,6 +31,7 @@ public class Game {
     /************* DISPLAY MAP *******************/
 
     public void displayMap(){
+        System.out.println("=============== MAP ===============");
 
         for(int y = 0; y <10; y++) {
             System.out.print("   ");
@@ -40,6 +41,8 @@ public class Game {
             }
             System.out.println();
         }
+        System.out.println("===================================");
+        System.out.println();
     }
 
 
@@ -115,9 +118,9 @@ public class Game {
         }
 
 
-          for(int j = 0; j < p.getTerritories().size(); j++){
+          /*for(int j = 0; j < p.getTerritories().size(); j++){
               System.out.println("Territory "+p.getTerritories().get(j).getId()+ " : "+ p.getTerritories().get(j).getStrength() + "(strength)");
-          }
+          }*/
 
     }
 
@@ -136,16 +139,18 @@ public class Game {
 
     public void infoPlayer(Player p)
     {
-        System.out.println("===============");
-        System.out.println("Name : " + p.getName());
-        System.out.println("Territories : ");
+        System.out.println("===================================");
+        System.out.println("PLAYER NAME : " + p.getName().toUpperCase());
+        System.out.println("TERRITORIES : ");
         for(Territory t : p.getTerritories()) {
-            System.out.println(t.getId() +"("+t.getStrength()+ ")  -> neighbour : ");
+            System.out.println("--> "+t.getId() +" (strength : "+ t.getStrength()+")" );
+            System.out.println("Neighbour : ");
             for (Territory v : t.getNeighboringTer()) {
+
                 System.out.println(v.getId() +", ");
             }
         }
-        System.out.println("===============");
+        System.out.println("===================================");
 
 
 
@@ -178,12 +183,12 @@ public class Game {
 
             sumDiceDefender += random.nextInt(6);
         }
-        System.out.printf("Defender result : " + sumDiceDefender);
+        System.out.println("Defender result : " + sumDiceDefender);
 
 
         if (sumDiceAttacker > sumDiceDefender) {
 
-            System.out.println("Attacker wins");
+            System.out.println("ATTACKER WINS");
 
             //the attackerTerritory take the territory, we add it to his list
             attackerPlayer.getTerritories().add(defenderTerritory);
@@ -210,7 +215,7 @@ public class Game {
         }
         else {
             attackerTerritory.setStrength(1);
-            System.out.println("Defender wins");
+            System.out.println("DEFENDER WINS");
             for(Player p: this.players){
                 infoPlayer(p);
             }
