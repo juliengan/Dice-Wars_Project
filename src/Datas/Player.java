@@ -1,5 +1,8 @@
 package Datas;
 
+import Exceptions.InvalidAttackedTerritory;
+import Exceptions.InvalidAttackingTerritory;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -29,7 +32,7 @@ public class Player {
 
 
     /*********** ATTACK TERRITORY ************/
-    public Move attackTerritory(Scanner input) {
+    public Move attackTerritory(Scanner input) throws InvalidAttackedTerritory, InvalidAttackingTerritory {
 
         Move move = null;
         Integer attack;
@@ -43,13 +46,12 @@ public class Player {
 
             // If the territory doesn't belong to the player
             if (!this.territories.contains(getTerritoryById(attack))) {
-                System.out.println("This is not your territory, you can't attack");
-                continue;
+                throw new InvalidAttackingTerritory("This is not your territory, you can't attack");
             }
             // If the territory doesn't have enough strength to attack
             else if (getTerritoryById(attack).getStrength() <= 1) {
-                System.out.println("This territory doesn't have enough strength to attack");
-                return move;
+                throw new InvalidAttackingTerritory("This territory doesn't have enough strength to attack");
+                //return move;
             }
 
             //---------------------------------------------------------------------------------
@@ -60,14 +62,12 @@ public class Player {
 
             // If the territory is not a neighbour
             if (getTerritoryById(attack).getNeighboringTer().contains(getTerritoryById(defend))) {
-                System.out.println("The territory you want to attack is not your neighbour ");
-                continue;
+                throw new InvalidAttackedTerritory("The territory you want to attack is not your neighbour ");
             }
 
             //If the territory belongs to the player
             else if (this.territories.contains(getTerritoryById(defend))) {
-                System.out.println("You can't attack your own territory ! ");
-                continue;
+                throw new InvalidAttackedTerritory("You can't attack your own territory ! ");
             }
 
             // Creation of the move we can leave the loop and return this.
