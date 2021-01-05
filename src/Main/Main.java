@@ -207,6 +207,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                  case 1: /***ATTACK***/
                      // The current player attack, we save its move if it is valid
                      move = game.getPlayers().get(indexPlayer).attackTerritory(input);
+                     if(move == null)
+                         continue;
 
                      // The defender and attacker throw their dices, we compare and perform the change according to the result.
                      game.throwDices(move);
@@ -229,7 +231,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
                              //distribution strength
                              firstDistribution = false;
-                             game.distributionStrengthTerritory((nb+game.getPlayers().size()), p, random,firstDistribution);
+                             game.distributionStrengthTerritory(nb, p, random,firstDistribution);
                              System.out.println("There are " + nb + " contiguous");
                              game.infoPlayer(p);
                          }

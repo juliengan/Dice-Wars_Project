@@ -109,6 +109,9 @@ public class Game {
             }
 
         }
+        else{
+            MAX_STRENGTH = totalStrength;
+        }
 
 
         while(MAX_STRENGTH > 0){
@@ -127,14 +130,10 @@ public class Game {
             System.out.println("Max strength : "+ MAX_STRENGTH);
             indexTerritory++;
             if(indexTerritory == p.getTerritories().size())
-                indexTerritory =0;
+                indexTerritory = 0;
 
         }
 
-
-          /*for(int j = 0; j < p.getTerritories().size(); j++){
-              System.out.println("Territory "+p.getTerritories().get(j).getId()+ " : "+ p.getTerritories().get(j).getStrength() + "(strength)");
-          }*/
 
     }
 
@@ -261,7 +260,10 @@ public class Game {
 
 
         }
-        return nb;
+        if(nb ==4)
+            return nb-1;
+        else
+          return nb;
     }
 
 

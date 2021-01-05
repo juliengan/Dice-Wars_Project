@@ -42,7 +42,7 @@ public class Player {
             // If the territory doesn't have enough strength to attack
             else if (getTerritoryById(attack).getStrength() <= 1) {
                 System.out.println("This territory doesn't have enough strength to attack");
-                continue;
+                return move;
             }
 
             //---------------------------------------------------------------------------------
