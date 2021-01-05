@@ -173,7 +173,7 @@ public class Game {
 
         for (int i = 0; i < attackerTerritory.getStrength(); i++) {
 
-            sumDiceAttacker += random.nextInt(6);
+            sumDiceAttacker += (int)(Math.random() * 6) + 1;//random.nextInt(6);
 
         }
         System.out.println("Attacker result : " + sumDiceAttacker);
