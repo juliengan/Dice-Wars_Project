@@ -2,6 +2,8 @@ package Main;
 import Datas.Move;
 import Datas.Player;
 import Datas.Territory;
+import Exceptions.InvalidAttackedTerritory;
+import Exceptions.InvalidAttackingTerritory;
 import Logic.Game;
 import Datas.Map;
 
@@ -85,7 +87,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidAttackingTerritory, InvalidAttackedTerritory {
 
         /**************** Game configuration *****************/
 
