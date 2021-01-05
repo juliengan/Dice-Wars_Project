@@ -20,7 +20,7 @@ public class Main {
         // Choice of the map
         System.out.println("Choose the map you want : ");
         System.out.println("1. From CSV file");
-        System.out.println("2. Random map ");
+        System.out.println("2. Map in the game ");
 
         int choiceMap = input.nextInt();
 
@@ -33,6 +33,7 @@ public class Main {
             case 2 :
                 //Load a map from the program
                 Map map = new Map();
+
                 return map;
 
             default :
@@ -128,12 +129,12 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         ArrayList<Territory> allTerritories = new ArrayList<Territory>();
 
         /**************** CONFIGURATION *****************/
+        //Ask the number of players and create each players with their id and names
+        players = creationOfPlayers(input,players);
 
         //The player choose if he want a csv file or a random map + creation of the map
         Map map =  mapChoice(input);
 
-        //Ask the number of players and create each players with their id and names
-        players = creationOfPlayers(input,players);
 
 
         /**************** INITIALIZATION ****************/
@@ -225,8 +226,9 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                              nb = game.nbOfcontiguousTerritory(p);
 
                              //distribution strength
-                             game.distributionStrengthTerritory(nb, p, random);
+                             game.distributionStrengthTerritory((nb+game.getPlayers().size()), p, random);
                              System.out.println("There are " + nb + " contiguous");
+                             game.infoPlayer(p);
                          }
                      }
                      break;
