@@ -25,6 +25,8 @@ public class Map {
         return listOfTerritories;
     }
 
+
+
     public Map(){
 
         //Creation of four territory : o is the water
