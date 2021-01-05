@@ -92,18 +92,24 @@ public class Game {
 
     /*********** STRENGTH DISTRIBUTION *********/
 
-    public void distributionStrengthTerritory(int totalStrength, Player p, Random r){
-        System.out.println("Player "+ p.getId()+" : "+ p.getName().toUpperCase());
+    public void distributionStrengthTerritory(int totalStrength, Player p, Random r, boolean firstDistribution) {
+        System.out.println("Player " + p.getId() + " : " + p.getName().toUpperCase());
 
         int randomStrength;
         //we remove to the total strength the number of territories of the player because we set at 1 the strength of each territory
-        int MAX_STRENGTH = (totalStrength-p.getTerritories().size());
+        int MAX_STRENGTH = (totalStrength - p.getTerritories().size());
         int indexTerritory = 0;
 
-        //By default, each territory has 1 strength
-        for(Territory t : p.getTerritories()){
-            t.setStrength(1);
+        //if this the first distribution
+        if (firstDistribution) {
+
+            //By default, each territory has 1 strength
+            for (Territory t : p.getTerritories()) {
+                t.setStrength(1);
+            }
+
         }
+
 
         while(MAX_STRENGTH > 0){
 

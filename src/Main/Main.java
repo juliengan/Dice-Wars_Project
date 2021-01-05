@@ -121,6 +121,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
         Scanner input = new Scanner(System.in);
         Random random = new Random();
+        boolean firstDistribution = true;
 
         //Creation of a list of players
         ArrayList<Player> players = new ArrayList<Player>();
@@ -157,7 +158,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
        //Probleme : pourquoi le premier joueur en a un de plus ? A corriger !
         int totalStrength = 8 ;
         for(Player p : game.getPlayers()) {
-            game.distributionStrengthTerritory(totalStrength, p, random);
+            game.distributionStrengthTerritory(totalStrength, p, random,firstDistribution);
         }
 
 
@@ -175,6 +176,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
           //Boolean to check if the turn is over
           boolean endTurn = false;
+
 
           // Choose te action : attack or pass
           int choice;
@@ -226,7 +228,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                              nb = game.nbOfcontiguousTerritory(p);
 
                              //distribution strength
-                             game.distributionStrengthTerritory((nb+game.getPlayers().size()), p, random);
+                             firstDistribution = false;
+                             game.distributionStrengthTerritory((nb+game.getPlayers().size()), p, random,firstDistribution);
                              System.out.println("There are " + nb + " contiguous");
                              game.infoPlayer(p);
                          }
