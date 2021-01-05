@@ -6,12 +6,19 @@ import java.util.Scanner;
 
 public class Player {
 
-    /*******************************************/
+    /*************** ATTRIBUTES ****************/
     private final int id ;
     private ArrayList<Territory> territories;
     private String name;
     private boolean lost = false;
     /*******************************************/
+
+
+    /****************** METHODS ***************/
+    // Player (int id)
+    // attackTerritory (Scanner input)
+    // getTerritorybyId (int id)
+    /*****************************************/
 
 
     /*************** CONSTRUCTOR **************/
@@ -42,7 +49,7 @@ public class Player {
             // If the territory doesn't have enough strength to attack
             else if (getTerritoryById(attack).getStrength() <= 1) {
                 System.out.println("This territory doesn't have enough strength to attack");
-                continue;
+                return move;
             }
 
             //---------------------------------------------------------------------------------

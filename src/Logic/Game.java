@@ -10,11 +10,32 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    /******************************************/
+
+    /*************** ATTRIBUTES ****************/
     private  Map map;
     private ArrayList <Territory> allTerritories;
     private final ArrayList<Player> players;
     /******************************************/
+
+
+
+    /************** METHODS ***************/
+    // void displayMap()
+    // void territoriesDistribution (ArrayList<Territory> allTerritories, Random random)
+    // void distributionStrengthTerritory (int totalStrength, Player p, Random r, boolean firstDistribution)
+    // Territory getTerritoryById(int id)
+    // void infoPlayer(Player p)
+    // void throwDices(Move move)
+    // int nbOfcontiguousTerritory(Player p)
+    // int askAction(Scanner input, int indexPlayer)
+    // void isPlayerLoose()
+    // boolean isEndTurn(boolean endTurn, int firstPlayer, int indexPlayer)
+    // Player whoIsWinner()
+    // boolean checkEnd()
+    /*************************************/
+
+
+
 
     /*************** CONSTRUCTOR **************/
     public Game(ArrayList<Player> players, Map newMap){
@@ -109,6 +130,9 @@ public class Game {
             }
 
         }
+        else{
+            MAX_STRENGTH = totalStrength;
+        }
 
 
         while(MAX_STRENGTH > 0){
@@ -127,14 +151,10 @@ public class Game {
             System.out.println("Max strength : "+ MAX_STRENGTH);
             indexTerritory++;
             if(indexTerritory == p.getTerritories().size())
-                indexTerritory =0;
+                indexTerritory = 0;
 
         }
 
-
-          /*for(int j = 0; j < p.getTerritories().size(); j++){
-              System.out.println("Territory "+p.getTerritories().get(j).getId()+ " : "+ p.getTerritories().get(j).getStrength() + "(strength)");
-          }*/
 
     }
 
@@ -261,7 +281,10 @@ public class Game {
 
 
         }
-        return nb;
+        if(nb ==4)
+            return nb-1;
+        else
+          return nb;
     }
 
 
