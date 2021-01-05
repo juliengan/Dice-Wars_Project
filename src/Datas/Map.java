@@ -6,13 +6,18 @@ import java.util.ArrayList;
 
 public class Map {
 
+    /*************** ATTRIBUTES ****************/
    private Territory [][] map;
    private ArrayList<Territory> listOfTerritories;
+    /******************************************/
 
 
-    public Map(File gnagnagna){ //init map from CSV file
+   /**************** METHODS *****************/
+   // Map()
+   // Map (File file)
+   /*****************************************/
 
-    }
+
     public Territory getTerritory(int x, int y){
         return this.map[x][y];
 
@@ -26,6 +31,9 @@ public class Map {
     }
 
 
+    public Map(File file){
+//init map from CSV file
+    }
 
     public Map(){
 

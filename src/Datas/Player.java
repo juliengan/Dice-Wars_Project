@@ -6,12 +6,19 @@ import java.util.Scanner;
 
 public class Player {
 
-    /*******************************************/
+    /*************** ATTRIBUTES ****************/
     private final int id ;
     private ArrayList<Territory> territories;
     private String name;
     private boolean lost = false;
     /*******************************************/
+
+
+    /****************** METHODS ***************/
+    // Player (int id)
+    // attackTerritory (Scanner input)
+    // getTerritorybyId (int id)
+    /*****************************************/
 
 
     /*************** CONSTRUCTOR **************/

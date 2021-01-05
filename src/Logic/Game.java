@@ -10,11 +10,32 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    /******************************************/
+
+    /*************** ATTRIBUTES ****************/
     private  Map map;
     private ArrayList <Territory> allTerritories;
     private final ArrayList<Player> players;
     /******************************************/
+
+
+
+    /************** METHODS ***************/
+    // void displayMap()
+    // void territoriesDistribution (ArrayList<Territory> allTerritories, Random random)
+    // void distributionStrengthTerritory (int totalStrength, Player p, Random r, boolean firstDistribution)
+    // Territory getTerritoryById(int id)
+    // void infoPlayer(Player p)
+    // void throwDices(Move move)
+    // int nbOfcontiguousTerritory(Player p)
+    // int askAction(Scanner input, int indexPlayer)
+    // void isPlayerLoose()
+    // boolean isEndTurn(boolean endTurn, int firstPlayer, int indexPlayer)
+    // Player whoIsWinner()
+    // boolean checkEnd()
+    /*************************************/
+
+
+
 
     /*************** CONSTRUCTOR **************/
     public Game(ArrayList<Player> players, Map newMap){
