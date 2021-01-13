@@ -76,7 +76,7 @@ public class Player {
             System.out.println("Your move is : (" + move.getIdAttacker() + " " + move.getIdDefender() + ")");
 
         }
-return move;
+            return move;
 
     }
 

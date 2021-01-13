@@ -34,9 +34,8 @@ public class Main {
 
             case 2 :
                 //Load a map from the program
-                Map map = new Map();
-
-                return map;
+               // Map map = new Map();
+               // return map;
 
             default :
                 System.out.println("Non-valid input");
@@ -111,12 +110,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
         //1- Choose the first player
         //2- Two possible action : end turn and attack.
-           // if(action == attack) -> do the action
-           // else -> next player
-
-
-
-
+        // if(action == attack) -> do the action
+        // else -> next player
 
 
         /******************* DATAS **********************/
@@ -132,12 +127,12 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         ArrayList<Territory> allTerritories = new ArrayList<Territory>();
 
         /**************** CONFIGURATION *****************/
+
         //Ask the number of players and create each players with their id and names
-        players = creationOfPlayers(input,players);
+        players = creationOfPlayers(input, players);
 
         //The player choose if he want a csv file or a random map + creation of the map
-        Map map =  mapChoice(input);
-
+        Map map = new Map(players.size());
 
 
         /**************** INITIALIZATION ****************/
@@ -147,7 +142,9 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         Game game = new Game(players, map);
 
         //display of the map
-        game.displayMap();
+        game.displayMap(game.getPlayers().size());
+
+        /*
 
         allTerritories = game.getMap().getListOfTerritories();
         game.setAllTerritories(allTerritories);
@@ -157,8 +154,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
 
        //Distribution strength for territories (number of dices per territory)
-       //Probleme : pourquoi le premier joueur en a un de plus ? A corriger !
-        int totalStrength = 8 ;
+        final int totalStrength = 8 ;
         for(Player p : game.getPlayers()) {
             game.distributionStrengthTerritory(totalStrength, p, random,firstDistribution);
         }
@@ -168,7 +164,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           /******************** PLAYING *********************/
 
         //------------------------------------------------------------------------------------------
-
+/*
           // Choose the first player randomly
           int firstPlayer = random.nextInt(game.getPlayers().size());
           int indexPlayer = firstPlayer;
@@ -207,8 +203,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
              switch(game.askAction(input,indexPlayer)){
 
                  case 1: /***ATTACK***/
-                     // The current player attack, we save its move if it is valid
-                     move = game.getPlayers().get(indexPlayer).attackTerritory(input);
+        // The current player attack, we save its move if it is valid
+ /*                    move = game.getPlayers().get(indexPlayer).attackTerritory(input);
                      if(move == null)
                          continue;
 
@@ -217,8 +213,8 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
                      break;
 
                  case 2: /**PASS**/
-                     // If the  player pass, we increase the index of the next player
-                    indexPlayer++;
+        // If the  player pass, we increase the index of the next player
+  /*                  indexPlayer++;
                      if(indexPlayer == players.size())
                         indexPlayer = 0;
 
@@ -257,5 +253,6 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
         }
 
-
+*/
+    }
     }

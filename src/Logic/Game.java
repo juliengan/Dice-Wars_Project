@@ -40,7 +40,7 @@ public class Game {
     /*************** CONSTRUCTOR **************/
     public Game(ArrayList<Player> players, Map newMap){
 
-        map = new Map();
+
         allTerritories = new ArrayList<Territory>();
         this.players = players;
         this.map = newMap;
@@ -51,21 +51,25 @@ public class Game {
 
     /************* DISPLAY MAP *******************/
 
-    public void displayMap(){
+    public void displayMap(int nbPlayers){
         System.out.println("=============== MAP ===============");
 
-        for(int y = 0; y <10; y++) {
+        for(int y = 0; y < nbPlayers; y++) {
             System.out.print("   ");
-            for (int x = 0; x < 10; x++){
-                System.out.print("{T" +this.map.getMap()[y][x].getId() + " ");
-                System.out.print("P" +this.map.getTerritory(x,y).getPlayerId() + "  ");
-                System.out.print(this.map.getMap()[y][x].getStrength() + "dice} ");
+            for (int x = 0; x < nbPlayers; x++){
+                System.out.print("[T : " + this.map.getMap()[y][x].getId() + "  ");
+               System.out.print("P" +this.map.getMap()[y][x].getPlayerId() + "  ");
+                System.out.print("DICE : "+this.map.getMap()[y][x].getStrength() + "  ] ");
+                System.out.println("ok");
             }
             System.out.println();
         }
         System.out.println("===================================");
         System.out.println();
+        System.out.println("je sors");
     }
+
+
 
 
     /*********** TERRITORIES DISTRIBUTION *********/
@@ -81,7 +85,7 @@ public class Game {
         ArrayList<Territory> temp = (ArrayList<Territory>) allTerritories.clone();
 
         //Remove the first territory which is neutral (water)
-        temp.remove(0);
+        //temp.remove(0);
 
         // While there are territories to distribute in th list
         while(temp.size() != 0){
