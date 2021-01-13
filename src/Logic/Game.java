@@ -52,17 +52,23 @@ public class Game {
     /************* DISPLAY MAP *******************/
 
     public void displayMap(int nbPlayers){
+        System.out.println("nbplayer : "+nbPlayers);
         System.out.println("=============== MAP ===============");
 
-        for(int y = 0; y < nbPlayers; y++) {
-            System.out.print("   ");
-            for (int x = 0; x < nbPlayers; x++){
+
+
+        for(int y = 0; y < this.map.x; y++) {
+            System.out.println();
+
+            for (int x = 0; x < this.map.y; x++){
+
                 System.out.print("[T : " + this.map.getMap()[y][x].getId() + "  ");
-               System.out.print("P" +this.map.getMap()[y][x].getPlayerId() + "  ");
+                System.out.print("P" + this.map.getMap()[y][x].getPlayerId() + "  ");
                 System.out.print("DICE : "+this.map.getMap()[y][x].getStrength() + "  ] ");
-                System.out.println("ok");
+
             }
             System.out.println();
+
         }
         System.out.println("===================================");
         System.out.println();

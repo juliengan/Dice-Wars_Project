@@ -140,6 +140,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
         //Creation of the game. Parameters : players and map
         Game game = new Game(players, map);
+        game.setAllTerritories(game.getMap().getListOfTerritories());
 
         //display of the map
         game.displayMap(game.getPlayers().size());

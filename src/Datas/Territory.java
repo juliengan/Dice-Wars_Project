@@ -2,7 +2,7 @@ package Datas;
 
 import java.util.ArrayList;
 
-public class Territory {
+public class Territory implements Cloneable  {
 
 
     /*************** ATTRIBUTES ****************/
@@ -63,5 +63,22 @@ public class Territory {
 
     public ArrayList<Territory> getNeighboringTer() {
         return neighboringTer;
+    }
+
+
+
+    public Object clone() {
+        Object o = null;
+        try {
+            // On récupère l'instance à renvoyer par l'appel de la
+            // méthode super.clone()
+            o = super.clone();
+        } catch(CloneNotSupportedException cnse) {
+            // Ne devrait jamais arriver car nous implémentons
+            // l'interface Cloneable
+            cnse.printStackTrace(System.err);
+        }
+        // on renvoie le clone
+        return o;
     }
 }
