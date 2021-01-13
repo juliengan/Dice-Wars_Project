@@ -16,13 +16,7 @@ public class Map {
    // Map()
    // Map (File file)
    /*****************************************/
-
-
-    public Territory getTerritory(int x, int y){
-        return this.map[x][y];
-
-    }
-    public Territory[][] getMap() {
+   public Territory[][] getMap() {
         return map;
     }
 
@@ -30,7 +24,7 @@ public class Map {
         return listOfTerritories;
     }
 
-
+    public Territory getTerritory(int x, int y){ return map[x][y]; }
     public Map(File file){
 //init map from CSV file
     }

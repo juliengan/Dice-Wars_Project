@@ -28,6 +28,7 @@ public class Player {
     public Player(Integer id) {
         territories = new ArrayList<>();
         this.id = id;
+        //name et boolean lost ?
     }
 
 
@@ -35,8 +36,8 @@ public class Player {
     public Move attackTerritory(Scanner input) throws InvalidAttackedTerritory, InvalidAttackingTerritory {
 
         Move move = null;
-        Integer attack;
-        Integer defend;
+        Integer attack;//id of the attacking territory
+        Integer defend;//id of the attacked territory
 
         // While the move is not valid, we continue to ask to the player
         while (move == null) {

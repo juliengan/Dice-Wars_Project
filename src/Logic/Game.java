@@ -57,8 +57,9 @@ public class Game {
         for(int y = 0; y <10; y++) {
             System.out.print("   ");
             for (int x = 0; x < 10; x++){
-                System.out.print(this.map.getMap()[y][x].getId() + "  ");
-
+                System.out.print("{T" +this.map.getMap()[y][x].getId() + " ");
+                System.out.print("P" +this.map.getTerritory(x,y).getPlayerId() + "  ");
+                System.out.print(this.map.getMap()[y][x].getStrength() + "dice} ");
             }
             System.out.println();
         }
