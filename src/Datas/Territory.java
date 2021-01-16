@@ -22,7 +22,7 @@ public class Territory implements Cloneable  {
     public Territory(Integer id, Integer playerID) {
         this.id = id;
         this.playerId = playerID;
-        this.strength = 1; //we put at least a strength of 1 for each territory
+      //we put at least a strength of 1 for each territory
         this.neighboringTer = new ArrayList<Territory>();
     }
 

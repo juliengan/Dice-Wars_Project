@@ -156,11 +156,20 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         //display of the map
         game.displayMap(game.getPlayers().size());
 
+
+        System.out.println("Territoire de P1");
+        for(Territory t : game.getPlayers().get(0).getTerritories())
+            System.out.println(t.getId());
+
+        System.out.println("Territoire de P2");
+        for(Territory t : game.getPlayers().get(1).getTerritories())
+            System.out.println(t.getId());
+
         //Distribution strength for territories (number of dices per territory)
         final int totalStrength = 16 ;
-        for(Player p : game.getPlayers()) {
-            game.distributionStrengthTerritory(totalStrength, p, random,firstDistribution);
-        }
+        game.distributionStrengthTerritory(totalStrength, game.getPlayers().get(1), random,firstDistribution);
+            game.distributionStrengthTerritory(totalStrength, game.getPlayers().get(0), random,firstDistribution);
+
 
 
         //display of the map

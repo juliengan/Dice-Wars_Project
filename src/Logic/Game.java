@@ -168,15 +168,18 @@ public class Game {
             //By default, each territory has 1 strength
             for (Territory t : p.getTerritories()) {
                 t.setStrength(1);
-            }
 
-            for(int y = 0; y < this.map.x; y++) {
+                for(int y = 0; y < this.map.x; y++) {
 
-                for (int x = 0; x < this.map.y; x++) {
+                    for (int x = 0; x < this.map.y; x++) {
+                        if(this.map.getMap()[y][x].getId().equals(t.getId()))
 
-                   this.map.getMap()[y][x].setStrength(1);
+                            this.map.getMap()[y][x].setStrength(1);
+                    }
                 }
+
             }
+
 
 
 
@@ -198,6 +201,7 @@ public class Game {
                 for(int y = 0; y < this.map.x; y++) {
 
                     for (int x = 0; x < this.map.y; x++) {
+                        if(this.map.getMap()[y][x].getId().equals(p.getTerritories().get(indexTerritory).getId()))
 
                         this.map.getMap()[y][x].addStrength(randomStrength);
                     }
