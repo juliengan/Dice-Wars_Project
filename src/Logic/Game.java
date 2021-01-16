@@ -6,8 +6,10 @@ import Datas.Player;
 import Datas.Territory;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
@@ -52,10 +54,8 @@ public class Game {
     /************* DISPLAY MAP *******************/
 
     public void displayMap(int nbPlayers){
-        System.out.println("nbplayer : "+nbPlayers);
+
         System.out.println("=============== MAP ===============");
-
-
 
         for(int y = 0; y < this.map.x; y++) {
             System.out.println();
@@ -72,7 +72,7 @@ public class Game {
         }
         System.out.println("===================================");
         System.out.println();
-        System.out.println("je sors");
+
     }
 
 
@@ -80,47 +80,77 @@ public class Game {
 
     /*********** TERRITORIES DISTRIBUTION *********/
 
-    public void territoriesDistribution(ArrayList<Territory> allTerritories, Random random){
+    public void territoriesDistribution( Random random){
+        System.out.println("ter size : "+this.allTerritories.size());
 
         int playerIndex = 0;
 
         // Create a random territory
-        Territory randomTerritory;
+        Territory randomTerritory = new Territory(0,0);
 
         // Create a deep copy of allTerritories to avoid changes
-        ArrayList<Territory> temp = (ArrayList<Territory>) allTerritories.clone();
+        ArrayList<Territory> temp = new ArrayList<Territory>();
+        Iterator<Territory> iterator = this.allTerritories.iterator();
 
-        //Remove the first territory which is neutral (water)
-        //temp.remove(0);
+
+        while(iterator.hasNext())
+        {
+            //Add the object clones
+            temp.add((Territory) iterator.next().clone());
+        }
+        int nbTerritoryToDistribute = this.allTerritories.size();
 
         // While there are territories to distribute in th list
         while(temp.size() != 0){
 
-                //choose a random index among the size of the list
-                int randomIndex = random.nextInt(temp.size());
+            //choose a random index among the size of the list
+            int randomIndex  = ThreadLocalRandom.current().nextInt(temp.size());
+            //System.out.println("index random"+ randomIndex);
+            //System.out.println("territoire random : "+ temp.get(randomIndex).getId());
 
-                //pick the territory according to the index
-                 randomTerritory = temp.get(randomIndex);
+            //set the player id in the map
 
-                //give the territory to the current player
-                 players.get(playerIndex).getTerritories().add(randomTerritory);
+            for(int y = 0; y < this.map.x; y++) {
 
-                 //set the player id for the territory
-                 randomTerritory.setPlayerId( players.get(playerIndex).getId());
+                for (int x = 0; x < this.map.y; x++) {
 
-                 //delete the territory of the list
-                 temp.remove(randomIndex);
+                    if(temp.get(randomIndex).getId() == this.map.getMap()[y][x].getId()) {
+                        this.map.getMap()[y][x].setPlayerId(players.get(playerIndex).getId());
+                        //System.out.println("je donne le territoire"+ this.map.getMap()[y][x].getId()+" au player "+ players.get(playerIndex).getId() );
+                    }
+                }
+            }
 
-            // increase the playerindex to deal with the next one
-            playerIndex ++;
+            //set the player id in all territories
 
-            // If we reach the end of the list of player we put the index to 0 and continue
+            for(Territory t : this.allTerritories){
+                if(t.getId() == temp.get(randomIndex).getId())
+                    t.setPlayerId(players.get(playerIndex).getId());
+            }
+
+
+
+            //give the territory to the current player
+            players.get(playerIndex).getTerritories().add(temp.get(randomIndex));
+
+
+
+            temp.remove(temp.get(randomIndex));
+            playerIndex++;
             if(playerIndex == players.size() )
                 playerIndex = 0;
-        }
 
 
+
+       }
+
+      for(Player p : this.players){
+          System.out.println("player"+ p.getName()+ "nb ter"+p.getTerritories().size());
+      }
     }
+
+
+
 
     /*********** STRENGTH DISTRIBUTION *********/
 
@@ -140,6 +170,16 @@ public class Game {
                 t.setStrength(1);
             }
 
+            for(int y = 0; y < this.map.x; y++) {
+
+                for (int x = 0; x < this.map.y; x++) {
+
+                   this.map.getMap()[y][x].setStrength(1);
+                }
+            }
+
+
+
         }
         else{
             MAX_STRENGTH = totalStrength;
@@ -154,6 +194,14 @@ public class Game {
                 continue;
 
             else{
+
+                for(int y = 0; y < this.map.x; y++) {
+
+                    for (int x = 0; x < this.map.y; x++) {
+
+                        this.map.getMap()[y][x].addStrength(randomStrength);
+                    }
+                }
                 p.getTerritories().get(indexTerritory).addStrength(randomStrength);
                 System.out.println("on met au territoire "+ p.getTerritories().get(indexTerritory).getId()+"une force de "+ randomStrength);
             }

@@ -53,7 +53,7 @@ public class Map {
 
 
         for (int i = 0; i < nbPlayers*4; i++) {
-            Territory t = new Territory(i, 0);
+            Territory t = new Territory(i+1, 0);
             this.listOfTerritories.add(t);
 
         }
@@ -105,7 +105,7 @@ public class Map {
 
         if(nbPlayers == 2){
             x = 2;
-            y = 2;
+            y = 4;
             this.map = new Territory[x][y];
         }
         if(nbPlayers == 3){

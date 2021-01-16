@@ -57,10 +57,10 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
     int nbPlayers= input.nextInt();
 
 
-    for(int i = 0; i < nbPlayers; i++){
+    for(int i = 1; i <= nbPlayers; i++){
 
         //creation of the player with an ID
-        Player p = new Player(i+1);
+        Player p = new Player(i);
 
         // Name settings
         System.out.print("Player " + (i+1) +" ,enter your name : ");
@@ -145,20 +145,30 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
         //display of the map
         game.displayMap(game.getPlayers().size());
 
-        /*
 
-        allTerritories = game.getMap().getListOfTerritories();
-        game.setAllTerritories(allTerritories);
+
 
         //Distribution of territories between all players
-        game.territoriesDistribution(allTerritories, random);
+        game.territoriesDistribution( random);
 
 
-       //Distribution strength for territories (number of dices per territory)
-        final int totalStrength = 8 ;
+
+        //display of the map
+        game.displayMap(game.getPlayers().size());
+
+        //Distribution strength for territories (number of dices per territory)
+        final int totalStrength = 16 ;
         for(Player p : game.getPlayers()) {
             game.distributionStrengthTerritory(totalStrength, p, random,firstDistribution);
         }
+
+
+        //display of the map
+        game.displayMap(game.getPlayers().size());
+
+/*
+
+
 
 
 
