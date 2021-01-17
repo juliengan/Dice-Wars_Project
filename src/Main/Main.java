@@ -228,6 +228,7 @@ public class Main {
 
                  case 1: /***ATTACK***/
               // The current player attack, we save its move if it is valid
+                     game.displayMap(game.getPlayers().size());
                     move = game.getPlayers().get(indexPlayer).attackTerritory(input);
                      if(move == null)
                          continue;
@@ -245,6 +246,7 @@ public class Main {
 
 
                      if(game.isEndTurn(endTurn, firstPlayer, indexPlayer)) {
+                         System.out.println("END TURN");
 
                          //redistribution des dés, on récupère les territoires contigus.
                          int nb;
