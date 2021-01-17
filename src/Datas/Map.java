@@ -44,7 +44,7 @@ public class Map {
         //Créer un territoire ajouter un id
         // l'ajouter au tableau map  : map.add(t)
 
-        /*initialise la map a partir du csv 
+        /*Initialise la map a partir du csv
         int i=0, j=0;
         File file = new File("test.csv");
 
@@ -80,7 +80,7 @@ public class Map {
         }catch( IOException ioException ) { }*/
 
 
-
+        
         /*fonction pour calculer le nombre de ligne et de colonne dans le csv
         private static Integer[] getsizemapFromCVS() {
             int x = 0, y = 0, z=0;
