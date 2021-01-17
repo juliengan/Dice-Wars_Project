@@ -59,11 +59,11 @@ public class Map {
                 String[] row = line.split(";");  //every row is separated by a ";"
                 for (String index : row)   //will go through each line of the file
                 {
-                    int IDPlayer = Integer.parseInt(index);
+                    int ID = Integer.parseInt(index);
 
                     for (int g=0; g<=nbPlayerCSV -1; g++){
-                        if (IDPlayer == listPlayers[g].getID()){
-                            Territory[i][j] = new Territory(listPlayers[g]);
+                        if (ID == listPlayers[g].getID()){
+                            Territory[][] = new Territory(listPlayers[g]);
                             listPlayers[g].setListConqueredTerritories(Territory[i][j]);
                         }
                     }
