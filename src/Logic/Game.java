@@ -14,11 +14,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game {
 
     /*************** ATTRIBUTES ****************/
-    private  Map map;
-    private ArrayList <Territory> allTerritories;
+    private Map map;
+    private ArrayList<Territory> allTerritories;
     private final ArrayList<Player> players;
     /******************************************/
-
 
 
     /************** METHODS ***************/
@@ -37,10 +36,8 @@ public class Game {
     /*************************************/
 
 
-
-
     /*************** CONSTRUCTOR **************/
-    public Game(ArrayList<Player> players, Map newMap){
+    public Game(ArrayList<Player> players, Map newMap) {
 
 
         allTerritories = new ArrayList<Territory>();
@@ -49,22 +46,20 @@ public class Game {
     }
 
 
-
-
     /************* DISPLAY MAP *******************/
 
-    public void displayMap(int nbPlayers){
+    public void displayMap(int nbPlayers) {
 
         System.out.println("=============== MAP ===============");
 
-        for(int y = 0; y < this.map.x; y++) {
+        for (int y = 0; y < this.map.x; y++) {
             System.out.println();
 
-            for (int x = 0; x < this.map.y; x++){
+            for (int x = 0; x < this.map.y; x++) {
 
                 System.out.print("[T : " + this.map.getMap()[y][x].getId() + "  ");
                 System.out.print("P" + this.map.getMap()[y][x].getPlayerId() + "  ");
-                System.out.print("DICE : "+this.map.getMap()[y][x].getStrength() + "  ] ");
+                System.out.print("DICE : " + this.map.getMap()[y][x].getStrength() + "  ] ");
 
             }
             System.out.println();
@@ -76,80 +71,71 @@ public class Game {
     }
 
 
-
-
     /*********** TERRITORIES DISTRIBUTION *********/
 
-    public void territoriesDistribution( Random random){
-        System.out.println("ter size : "+this.allTerritories.size());
+    public void territoriesDistribution(Random random) {
+        System.out.println("ter size : " + this.allTerritories.size());
 
         int playerIndex = 0;
 
         // Create a random territory
-        Territory randomTerritory = new Territory(0,0);
+        Territory randomTerritory = new Territory(0, 0);
 
         // Create a deep copy of allTerritories to avoid changes
         ArrayList<Territory> temp = new ArrayList<Territory>();
         Iterator<Territory> iterator = this.allTerritories.iterator();
 
 
-        while(iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             //Add the object clones
             temp.add((Territory) iterator.next().clone());
         }
         int nbTerritoryToDistribute = this.allTerritories.size();
 
         // While there are territories to distribute in th list
-        while(temp.size() != 0){
+        while (temp.size() != 0) {
 
             //choose a random index among the size of the list
-            int randomIndex  = ThreadLocalRandom.current().nextInt(temp.size());
-            //System.out.println("index random"+ randomIndex);
-            //System.out.println("territoire random : "+ temp.get(randomIndex).getId());
+            int randomIndex = ThreadLocalRandom.current().nextInt(temp.size());
+
 
             //set the player id in the map
 
-            for(int y = 0; y < this.map.x; y++) {
+            for (int x = 0; x < this.map.x; x++) {
 
-                for (int x = 0; x < this.map.y; x++) {
+                for (int y = 0; y < this.map.y; y++) {
 
-                    if(temp.get(randomIndex).getId() == this.map.getMap()[y][x].getId()) {
-                        this.map.getMap()[y][x].setPlayerId(players.get(playerIndex).getId());
-                        //System.out.println("je donne le territoire"+ this.map.getMap()[y][x].getId()+" au player "+ players.get(playerIndex).getId() );
+                    if (temp.get(randomIndex).getId() == this.map.getMap()[x][y].getId()) {
+                        this.map.getMap()[x][y].setPlayerId(players.get(playerIndex).getId());
+
                     }
                 }
             }
 
             //set the player id in all territories
 
-            for(Territory t : this.allTerritories){
-                if(t.getId() == temp.get(randomIndex).getId())
+            for (Territory t : this.allTerritories) {
+                if (t.getId() == temp.get(randomIndex).getId())
                     t.setPlayerId(players.get(playerIndex).getId());
             }
-
 
 
             //give the territory to the current player
             players.get(playerIndex).getTerritories().add(temp.get(randomIndex));
 
 
-
             temp.remove(temp.get(randomIndex));
             playerIndex++;
-            if(playerIndex == players.size() )
+            if (playerIndex == players.size())
                 playerIndex = 0;
 
 
+        }
 
-       }
-
-      for(Player p : this.players){
-          System.out.println("player"+ p.getName()+ "nb ter"+p.getTerritories().size());
-      }
+        for (Player p : this.players) {
+            System.out.println("player" + p.getName() + "nb ter" + p.getTerritories().size());
+        }
     }
-
-
 
 
     /*********** STRENGTH DISTRIBUTION *********/
@@ -164,56 +150,65 @@ public class Game {
 
         //if this the first distribution
         if (firstDistribution) {
+            for (Territory t : allTerritories) {
+                t.setStrength(1);
+
+            }
+
+            for (Territory t : this.getMap().getListOfTerritories()) {
+                t.setStrength(1);
+
+            }
+
 
             //By default, each territory has 1 strength
             for (Territory t : p.getTerritories()) {
                 t.setStrength(1);
 
-                for(int y = 0; y < this.map.x; y++) {
+                for (int x = 0; x < this.map.x; x++) {
 
-                    for (int x = 0; x < this.map.y; x++) {
-                        if(this.map.getMap()[y][x].getId().equals(t.getId()))
+                    for (int y = 0; y < this.map.y; y++) {
+                        if (this.map.getMap()[x][y].getId().equals(t.getId()))
 
-                            this.map.getMap()[y][x].setStrength(1);
+                            this.map.getMap()[x][y].setStrength(1);
                     }
                 }
 
             }
 
 
-
-
-        }
-        else{
+        } else {
             MAX_STRENGTH = totalStrength;
         }
 
 
-        while(MAX_STRENGTH > 0){
+        while (MAX_STRENGTH > 0) {
 
-            randomStrength =  (int)(Math.random() * MAX_STRENGTH) + 1;//random.nextInt(6);
+            randomStrength = (int) (Math.random() * MAX_STRENGTH) + 1;//random.nextInt(6);
 
-            if(p.getTerritories().get(indexTerritory).getStrength() + randomStrength >= 8)
+            if (p.getTerritories().get(indexTerritory).getStrength() + randomStrength >= 8)
                 continue;
 
-            else{
+            else {
 
-                for(int y = 0; y < this.map.x; y++) {
+                for (int x = 0; x < this.map.x; x++) {
 
-                    for (int x = 0; x < this.map.y; x++) {
-                        if(this.map.getMap()[y][x].getId().equals(p.getTerritories().get(indexTerritory).getId()))
+                    for (int y = 0; y < this.map.y; y++) {
+                        if (this.map.getMap()[x][y].getId().equals(p.getTerritories().get(indexTerritory).getId()))
 
-                        this.map.getMap()[y][x].addStrength(randomStrength);
+                            this.map.getMap()[x][y].addStrength(randomStrength);
                     }
                 }
                 p.getTerritories().get(indexTerritory).addStrength(randomStrength);
+                this.allTerritories.get(indexTerritory).addStrength(randomStrength);
+                this.getMap().getListOfTerritories().get(indexTerritory).addStrength(randomStrength);
 
             }
 
-        MAX_STRENGTH = MAX_STRENGTH-randomStrength;
+            MAX_STRENGTH = MAX_STRENGTH - randomStrength;
 
             indexTerritory++;
-            if(indexTerritory == p.getTerritories().size())
+            if (indexTerritory == p.getTerritories().size())
                 indexTerritory = 0;
 
         }
@@ -222,15 +217,21 @@ public class Game {
     }
 
     //This function return a territory for a given ID
-    public Territory getTerritoryById(int id){
-        for(Territory t : this.allTerritories ){
-            if(t.getId() == id){
-                return  t;
+    public Territory getTerritoryById(int id) {
+        for (Player p : this.players) {
+            for (int i = 0; i < p.getTerritories().size(); i++) {
+                if (p.getTerritories().get(i).getId() == id) {
+                    return p.getTerritories().get(i);
+                }
             }
-        }
+
+    }
         System.out.println("null");
         return null;
     }
+
+
+
 
     /*********** INFO PLAYER *********/
 
@@ -264,6 +265,9 @@ public class Game {
         Player attackerPlayer = getPlayerfromTerritory(attackerTerritory);
         Player defendPlayer = getPlayerfromTerritory(defenderTerritory);
 
+        System.out.println("Attacker territory strength : "+ attackerTerritory.getStrength());
+        System.out.println("Defender territory strength : "+ defenderTerritory.getStrength());
+
 
         int sumDiceAttacker = 0;
         int sumDiceDefender = 0;
@@ -271,6 +275,7 @@ public class Game {
         for (int i = 0; i < attackerTerritory.getStrength(); i++) {
 
             //random number bewteen 1 and 6
+
             sumDiceAttacker += (int)(Math.random() * 6) + 1;//random.nextInt(6);
 
         }
@@ -279,7 +284,8 @@ public class Game {
 
         for (int i = 0; i < defenderTerritory.getStrength() ; i++) {
 
-            sumDiceAttacker += (int)(Math.random() * 6) + 1;//random.nextInt(6);
+
+            sumDiceDefender += (int)(Math.random() * 6) + 1;//random.nextInt(6);
         }
         System.out.println("Defender result : " + sumDiceDefender);
 
@@ -287,6 +293,30 @@ public class Game {
         if (sumDiceAttacker > sumDiceDefender) {
 
             System.out.println("ATTACKER WINS");
+
+
+            //---------------update map---------------------------------
+            for (int x = 0; x < this.map.x; x++) {
+
+                for (int y = 0; y < this.map.y; y++) {
+
+                    if(this.map.getMap()[x][y].getId() == defenderTerritory.getId()){
+                        //on change le playerId
+                        this.map.getMap()[x][y].setPlayerId(attackerPlayer.getId());
+
+                        //On change le strength
+                        this.map.getMap()[x][y].setStrength(attackerTerritory.getStrength()-1);
+
+                    }
+
+                    if(this.map.getMap()[x][y].getId() == attackerTerritory.getId()){
+                        //territoire attaquant a une force de 1
+                        this.map.getMap()[x][y].setStrength(1);
+                    }
+
+                }
+            }
+
 
             //the attackerTerritory take the territory, we add it to his list
             attackerPlayer.getTerritories().add(defenderTerritory);
@@ -297,26 +327,37 @@ public class Game {
 
 
             //Remove the territory for the loser
-           defendPlayer.getTerritories().remove(defenderTerritory);
+            defendPlayer.getTerritories().remove(defenderTerritory);
 
             //he moves all his dice on the new territory exept 1
             defenderTerritory.setStrength(attackerTerritory.getStrength()-1);
 
             attackerTerritory.setStrength(1);
 
-            for(Player p: this.players){
-                infoPlayer(p);
-            }
 
+            //---------------update map---------------------------------
+            
 
 
         }
         else {
             attackerTerritory.setStrength(1);
             System.out.println("DEFENDER WINS");
-            for(Player p: this.players){
-                infoPlayer(p);
-            }
+
+
+
+            //---------------update map---------------------------------
+            for (int x = 0; x < this.map.x; x++) {
+
+                for (int y = 0; y < this.map.y; y++) {
+                    if(this.map.getMap()[x][y].getId() == attackerTerritory.getId()){
+                        //territoire attaquant a une force de 1
+                        this.map.getMap()[x][y].setStrength(1);
+                    }
+
+                }
+
+                }
         }
 
 
