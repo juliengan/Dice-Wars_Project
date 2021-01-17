@@ -1,9 +1,6 @@
 package Datas;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,9 +37,27 @@ public class Map {
     public Map(int nbPlayerCSV, int nbTerritoriesbyPlayerCSV, Player[] listPlayers) {
 
         //init map from CSV file
-
         //Créer un territoire ajouter un id
         // l'ajouter au tableau map  : map.add(t)
+
+        //open a csv file and print it 
+
+        /*String path = "C:\\Users\\chens\\Desktop\\projetJAVA\\openCSV\\CSV_test_Java.csv";
+        String column = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            while((column = br.readLine()) != null){
+                String[] values = column.split(";");
+                System.out.println(values[0]+ " " +  values[1] + " " + values[2] + " " + values[3] + " " + values[4] + " " + values[5]);
+                //System.out.println(column);
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
         /*Initialise la map a partir du csv
         int i=0, j=0;
@@ -116,7 +131,6 @@ public class Map {
             }
             return null;
         }*/
-
 
     }
 
