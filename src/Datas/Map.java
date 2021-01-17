@@ -1,6 +1,9 @@
 package Datas;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,11 +37,87 @@ public class Map {
         return this.map[x][y];
     }
 
-    public Map(File file) {
-//init map from CSV file
+    public Map(int nbPlayerCSV, int nbTerritoriesbyPlayerCSV, Player[] listPlayers) {
+
+        //init map from CSV file
 
         //Créer un territoire ajouter un id
         // l'ajouter au tableau map  : map.add(t)
+
+        /*initialise la map a partir du csv 
+        int i=0, j=0;
+        File file = new File("test.csv");
+
+        try
+        {
+            BufferedReader reader = new BufferedReader(new FileReader(file));	//read the csv file
+            String line;
+
+            //continue to read the next line
+            while ((line = reader.readLine()) != null)	//file reading
+            {
+                String[] row = line.split(";");  //every row is separated by a ";"
+                for (String index : row)   //will go through each line of the file
+                {
+                    int IDPlayer = Integer.parseInt(index);
+
+                    for (int g=0; g<=nbPlayerCSV -1; g++){
+                        if (IDPlayer == listPlayers[g].getID()){
+                            Territory[i][j] = new Territory(listPlayers[g]);
+                            listPlayers[g].setListConqueredTerritories(Territory[i][j]);
+                        }
+                    }
+
+                    j++;//increment the columns index
+                }
+                i++;//increment the line index
+                j=0;//reset the columns index
+            }
+
+
+            reader.close();
+
+        }catch( IOException ioException ) { }*/
+
+
+
+        /*fonction pour calculer le nombre de ligne et de colonne dans le csv
+        private static Integer[] getsizemapFromCVS() {
+            int x = 0, y = 0, z=0;
+            File file = new File("test.csv");
+
+            try{
+                BufferedReader reader = new BufferedReader(new FileReader(file));    //read the csv file
+                String line;
+
+                //continue to read the next line
+                while ((line = reader.readLine()) != null)	//file reading
+                {
+                    String[] row = line.split(";");  //every row is separated by a ";"
+                    for (String index : row)   //will go through each line of the file
+                    {
+                        y=y+1; //increment the columns index
+                    }
+                    x=x+1; //increment the line index
+                    z = y;
+                    y=0;//reset the columns index
+                }
+                Integer[] size = new Integer[2];
+                size[0]=x;
+                size[1]=z;
+
+                reader.close();
+                return size;
+
+            }
+
+            catch( Exception e ) {
+                e.printStackTrace();
+            }
+            return null;
+        }*/
+
+
     }
 
     public Map(int nbPlayers) {
