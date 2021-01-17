@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public class Map {
@@ -42,7 +43,7 @@ public class Map {
 
     public Map(int nbPlayers) {
 
-    ;
+        ;
 
         Random rand = new Random();
 
@@ -50,46 +51,12 @@ public class Map {
         this.listOfTerritories = new ArrayList<Territory>();
 
 
-
-
-        for (int i = 0; i < nbPlayers*4; i++) {
-            Territory t = new Territory(i+1, 0);
+        for (int i = 0; i < nbPlayers * 4; i++) {
+            Territory t = new Territory(i + 1, 0);
             this.listOfTerritories.add(t);
 
         }
 
-        //neighbours
-        for (Territory t : this.listOfTerritories) {
-            t.UpdateneighboringTer(t);
-        }
-
-        //Creation of four territory : o is the water
-     /*  Territory o = new Territory(0,0);
-       Territory t1 = new Territory(1,0);
-       Territory t2 = new Territory(2,0);
-       Territory t3 = new Territory(3,0);
-       Territory t4 = new Territory(4,0);
-
-        //Initialization of neighbours
-        t1.UpdateneighboringTer(t3);
-
-        t2.UpdateneighboringTer(t3);
-        t2.UpdateneighboringTer(t4);
-
-        t3.UpdateneighboringTer(t1);
-        t3.UpdateneighboringTer(t2);
-        t3.UpdateneighboringTer(t4);
-
-        t4.UpdateneighboringTer(t2);
-        t4.UpdateneighboringTer(t3);*/
-
-
-        // Add all territories to the list of territories
-      /* listOfTerritories.add(o);
-       listOfTerritories.add(t1);
-       listOfTerritories.add(t2);
-       listOfTerritories.add(t3);
-       listOfTerritories.add(t4);*/
 
         int index;
 
@@ -97,55 +64,47 @@ public class Map {
         ArrayList<Territory> temp = new ArrayList<Territory>();
         Iterator<Territory> iterator = this.listOfTerritories.iterator();
 
-        while(iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             //Add the object clones
             temp.add((Territory) iterator.next().clone());
         }
 
-        if(nbPlayers == 2){
+        if (nbPlayers == 2) {
             x = 2;
             y = 4;
             this.map = new Territory[x][y];
         }
-        if(nbPlayers == 3){
+        if (nbPlayers == 3) {
             x = 4;
             y = 3;
             this.map = new Territory[x][y];
         }
-       if(nbPlayers == 4){
+        if (nbPlayers == 4) {
             x = 4;
             y = 4;
             this.map = new Territory[x][y];
         }
 
-      if(nbPlayers == 5){
+        if (nbPlayers == 5) {
             x = 4;
             y = 5;
             this.map = new Territory[x][y];
         }
 
 
-       if(nbPlayers == 6){
+        if (nbPlayers == 6) {
             x = 4;
             y = 6;
             this.map = new Territory[x][y];
         }
 
 
-
-
-
-
-
-
-
         while (temp.size() != 0) {
 
 
-            for (int i = 0; i <x; i++) {
+            for (int i = 0; i < x; i++) {
                 for (int j = 0; j < y; j++) {
-                    if(temp.size() == 0)
+                    if (temp.size() == 0)
                         break;
 
 
@@ -161,9 +120,109 @@ public class Map {
         }
 
 
+        //neighbour
+
+
+        for (int x = 0; x < this.x; x++) {
+
+            for (int y = 0; y < this.y; y++) {
+
+                //north west
+                if (x == 0 && y == 0) {
+
+                    System.out.println("je suis dans north west");
+                    map[x][y].addNeighbour(map[x + 1][y]);
+                    map[x][y].addNeighbour(map[x][y + 1]);
+
+                } else if (x == 0 && y == this.y - 1) {
+                    System.out.println("je suis dans south west");
+                    map[x][y].addNeighbour(map[x][y - 1]);
+                    map[x][y].addNeighbour(map[x + 1][y]);
+
+                } else if (x == 0 && (y != 0 || y != this.y - 1)) {
+                   // map[x][y].addNeighbour(map[x][y + 1]);
+                    map[x][y].addNeighbour(map[x][y - 1]);
+                    map[x][y].addNeighbour(map[x + 1][y]);
+                }
+
+                //north east
+
+                else if (x == this.x - 1 && y == 0) {
+                    map[x][y].addNeighbour(map[x - 1][y]);
+                    map[x][y].addNeighbour(map[x][y + 1]);
+                }
+                //sud east
+                else if (x == this.x - 1 && y == this.y - 1) {
+                    map[x][y].addNeighbour(map[x - 1][y]);
+                    map[x][y].addNeighbour(map[x][y - 1]);
+
+                } else if (y == this.y - 1 && (x != 0 || x != this.x - 1)) {
+                 //   map[x][y].addNeighbour(map[x][y + 1]);
+                    map[x][y].addNeighbour(map[x - 1][y]);
+                    map[x][y].addNeighbour(map[x + 1][y]);
+
+
+                } else {
+                    map[x][y].addNeighbour(map[x][y + 1]);
+                  //  map[x][y].addNeighbour(map[x][y-1]);
+                    map[x][y].addNeighbour(map[x - 1][y]);
+                   // map[x][y].addNeighbour(map[x + 1][y]);
+
+                }
+            }
+        }
 
     }
 }
+                //south west
+                //if( x == 0 && y == this.y){
+
+
+                //North east
+               /* if(x == this.x && y == 0){
+                    map[x][y].addNeighbour(map[x-1][y]);
+                    map[x][y].addNeighbour(map[x][y+1]);
+                }*/
+
+
+
+
+
+
+
+              /*  if( x == this.x){
+                    map[x][y].addNeighbour(map[x][y+1]);
+                    map[x][y].addNeighbour(map[x+1][y]);
+
+                }
+
+                if(y == this.y){
+                    map[x][y].addNeighbour(map[x][y-1]);
+                    map[x][y].addNeighbour(map[x+1][y]);
+                }
+            }
+
+            }
+
+              /*  //check les 4 points cardinaux
+                if (x-1 >0 || y-1>0){
+                    map[x][y].addNeighbour(map[y - 1][x]);
+                    t.addNeighbour(map[y][x - 1]);
+                }
+
+
+
+                if(x+1 <= XMAX || y+1 <= YMAX) {
+                    t.addNeighbour(map[y][x+1]);
+                    t.addNeighbour(map[y+1][x]);
+                }*/
+
+
+
+
+
+
+
 
 
 

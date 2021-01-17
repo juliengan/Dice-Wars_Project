@@ -167,15 +167,15 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
 
         //Distribution strength for territories (number of dices per territory)
         final int totalStrength = 16 ;
-        game.distributionStrengthTerritory(totalStrength, game.getPlayers().get(1), random,firstDistribution);
-            game.distributionStrengthTerritory(totalStrength, game.getPlayers().get(0), random,firstDistribution);
-
+        for(Player p : game.getPlayers()){
+            game.distributionStrengthTerritory(totalStrength,p, random,firstDistribution);
+        }
 
 
         //display of the map
         game.displayMap(game.getPlayers().size());
 
-/*
+
 
 
 
@@ -184,7 +184,7 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           /******************** PLAYING *********************/
 
         //------------------------------------------------------------------------------------------
-/*
+
           // Choose the first player randomly
           int firstPlayer = random.nextInt(game.getPlayers().size());
           int indexPlayer = firstPlayer;
@@ -207,6 +207,9 @@ static ArrayList<Player> creationOfPlayers(Scanner input, ArrayList <Player> pla
           for(Player p : game.getPlayers()){
              game.infoPlayer(p);
           }
+
+
+   /*
           //------------------------------------------------------------------------------------------
 
           // while the condition is not reach, we continue to play

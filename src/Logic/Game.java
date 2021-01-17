@@ -155,7 +155,7 @@ public class Game {
     /*********** STRENGTH DISTRIBUTION *********/
 
     public void distributionStrengthTerritory(int totalStrength, Player p, Random r, boolean firstDistribution) {
-        System.out.println("Player " + p.getId() + " : " + p.getName().toUpperCase());
+
 
         int randomStrength;
         //we remove to the total strength the number of territories of the player because we set at 1 the strength of each territory
@@ -207,11 +207,11 @@ public class Game {
                     }
                 }
                 p.getTerritories().get(indexTerritory).addStrength(randomStrength);
-                System.out.println("on met au territoire "+ p.getTerritories().get(indexTerritory).getId()+"une force de "+ randomStrength);
+
             }
 
         MAX_STRENGTH = MAX_STRENGTH-randomStrength;
-            System.out.println("Max strength : "+ MAX_STRENGTH);
+
             indexTerritory++;
             if(indexTerritory == p.getTerritories().size())
                 indexTerritory = 0;
